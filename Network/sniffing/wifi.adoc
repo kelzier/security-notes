@@ -1,0 +1,9 @@
+= WiFi
+
+== Monitor mode
+Either:  
+    airmon-ng start wlan2  
+Or:  
+    ifconfig wlan2 down  
+    iwconf wlan2 mode monitor  
+    ifconfig wlan2 up  
