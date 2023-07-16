@@ -1,14 +1,33 @@
-# mdk 
+# Monitor mode
+Either:   
+```
+airmon-ng start wlan0
+```
 
-Either:
-    airmon-ng start wlan2
-Or:
-    ifconfig wlan2 down
-    iwconf wlan2 mode monitor
-    ifconfig wlan2 up
+Or:  
+```
+ifconfig wlan0 down
+iwconf wlan0 mode monitor
+ifconfig wlan0 up
+```
+
+# Create a fake AP
+
+First, make sure the interface is in [monitor mode](#monitor-mode)
 
 
-mdk4 <interface> b -c <channel> -f <file>
-mdk4 wlan2 b -c 11 -f fake-net
+`mdk3 <interface> b -c <channel> -f <file>`
+`mdk3 <interface> b -n <ssid> -g -t -m`
 
+Where:   
+`<interface>`   - The interface that is being used to serve the fake AP
+`<channel>`     - The channel to transmit on
+`<file>`        - A file containing SSIDs
+`<ssid>`        - An SSID to assign to the AP
+`-g`            - Show AP as 54 Mbit.
+`-t`            - Show AP using WPA TKIP encryption
+`-m`            - Assign a valid MAC addresses from the OUI database
 
+example:
+`mdk3 wlan0mon b -c 11 -f fake-net.txt`    
+`mdk3 wlan0mon b -n free-internet -g -t -m`   
