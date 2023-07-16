@@ -2,16 +2,15 @@
 
 ## Options
 ```
--A     Print each packet (minus its link level header) in ASCII.  Handy for capturing web pages.
+-A      Print each packet (minus its link level header) in ASCII.  Handy for capturing web pages.
 
--l     Make stdout line buffered.  Useful if you want to see the data while capturing it.
+-l      Make stdout line buffered.  Useful if you want to see the data while capturing it.
 
--vv    Even more verbose output.  For example, additional fields are printed from NFS  reply  packets,  and
-              SMB packets are fully decoded.
+-vv     Even more verbose output.  For example, additional fields are printed from NFS  reply  packets,  and
+        SMB packets are fully decoded.
 
--w file
-              Write the raw packets to file rather than parsing and printing them out.  They can later be  printed
-              with the -r option.              
+-w file Write the raw packets to file rather than parsing and printing them out.  They can later be  printed
+        with the -r option.              
 
 ```
 
@@ -25,21 +24,23 @@
 
 **Three way handshake**
 
-```
-09:18:08.357631 IP 192.168.0.2 > kali.http: Flags [S], seq 1, win 64240, length 0
 
-09:18:08.365416 IP kali.http > 192.168.0.2: Flags [S.], seq 2, ack 3, win 65535, length 0
+> 09:18:08.357631 IP 192.168.0.2 > kali.http: Flags [S], seq 1, win 64240, length 0
+> 
+> 09:18:08.365416 IP kali.http > 192.168.0.2: Flags [S.], seq 2, ack 3, win 65535, length 0
+> 
+> 09:18:08.365429 IP 192.168.0.2 > kali.http: Flags [.], ack 1, win 502, length 0
 
-09:18:08.365429 IP 192.168.0.2 > kali.http: Flags [.], ack 1, win 502, length 0
-```
 
 The three way handshake can be seen in the example output above by looking at the flags:
 
+```
 [S] - This is the SYN flag
 
 [S.] - This is the SYN/ACK flags (the . represents ACK)
 
 [.] - This is the ACK flag
+```
 
 ## Filter traffic FROM a host
 `tcp dump src host 192.168.0.2`

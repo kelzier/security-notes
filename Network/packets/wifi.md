@@ -2,29 +2,24 @@
 
 ## Terminology
 
-**AP**          This is the access point or router where clients connect.
+| | |
+|-|-|
+|**AP**|This is the access point or router where clients connect.|
+|**PSK**|Pre-Shared Key. This is the passowrd used to authenticate with the AP.|
+|**SSID**|Service Set Identifier. The name used to identify the AP.|
+|**ESSID**|Extended Service Set Identifier. This is the same as the SSID by can be used for multiple APs in a wireless LAN.|
+|**BSSID**|Basic Service Set Identifier. This is the unique identifier for the AP. This is the same as the AP MAC Address.|
+|**Channel**|Wi-Fi operates on channels 1-14, but limited to 1-11 in the US.|
+|**Power**|The closer you get to the AP, the stronger the signal.|
+|**Security**|The security protocol to authenticate and encypt Wi-Fi traffic (WEP, WPA-PSK)|
+|**Modes**|Wi-Fi can operate in three modes: Master, Managed, Monitor.|
+|**Range**|At the legal limit of 0.5 watts, most Wi-Fi APs are accessible up to 100m, but high gain antennas can reach 20 miles.|
+|**Frequency**|Wi-Fi is designed to operate at 2.4GHZ and 5GHZ|
 
-**PSK**         Pre-Shared Key. This is the passowrd used to authenticate with the AP.
-
-**SSID**        Service Set Identifier. The name used to identify the AP.
-
-**ESSID**       Extended Service Set Identifier. This is the same as the SSID by can be used for multiple APs in a wireless LAN.
-
-**BSSID**       Basic Service Set Identifier. This is the unique identifier for the AP. This is the same as the AP MAC Address.
-
-**Channel**     Wi-Fi operates on channels 1-14, but limited to 1-11 in the US.
-
-**Power**       The closer you get to the AP, the stronger the signal.
-
-**Security**    The security protocol to authenticate and encypt Wi-Fi traffic (WEP, WPA-PSK)
-
-**Modes**       Wi-Fi can operate in three modes: Master, Managed, Monitor.
-
-**Range**       At the legal limit of 0.5 watts, most Wi-Fi APs are accessible up to 100m, but high gain antennas can reach 20 miles.
-
-**Frequency**   Wi-Fi is designed to operate at 2.4GHZ and 5GHZ
 
 ## Anatomy of a Wi-Fi frame
+
+### Management Frames
 | Type Value| Type description| Subtype value |      Subtype description    |       Wireshark filter       |
 |-----------|-----------------|---------------|-----------------------------|------------------------------|
 |         0 |      Management |             0 | Association request         | wlan.fc.type_subtype == 0x00 |
@@ -43,7 +38,7 @@
 |         0 |      Management |     1110-1111 | Reserved                    |                              |
 
 
-
+### Control Frames
 | Type Value| Type description| Subtype value |      Subtype description    |       Wireshark filter       |
 |-----------|-----------------|---------------|-----------------------------|------------------------------|
 |         1 |         Control |     0000-0111 | Reserved                    |                              |
@@ -57,6 +52,7 @@
 |         1 |         Control |          1111 | CF-END + CF-ack             | wlan.fc.type_subtype == 0x1F |
 
 
+### Data Frames
 | Type Value| Type description| Subtype value |      Subtype description    |       Wireshark filter       |
 |-----------|-----------------|---------------|-----------------------------|------------------------------|
 |        10 |            Data |             0 | Data                        | wlan.fc.type_subtype == 0x20 |

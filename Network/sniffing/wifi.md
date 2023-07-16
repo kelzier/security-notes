@@ -128,25 +128,3 @@ where:
 To allow internet traffic to flow through the rouge AP, a second network interface needs to be configured to allow traffic to seamlessly flow to any unsuspectingly connected clients.
 
 
-
-## Create a fake AP
-
-First, make sure the interface is in [monitor mode](#monitor-mode)
-
-
-`mdk3 <interface> b -c <channel> -f <file>`
-`mdk3 <interface> b -n <ssid> -g -t -m`
-
-Where:   
-`<interface>`   - The interface that is being used to serve the fake AP
-`<channel>`     - The channel to transmit on
-`<file>`        - A file containing SSIDs
-`<ssid>`        - An SSID to assign to the AP
-`-g`            - Show AP as 54 Mbit.
-`-t`            - Show AP using WPA TKIP encryption
-`-m`            - Assign a valid MAC addresses from the OUI database
-
-example:
-`mdk3 wlan0mon b -c 11 -f fake-net.txt`    
-`mdk3 wlan0mon b -n free-internet -g -t -m`    
-
