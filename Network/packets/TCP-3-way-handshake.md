@@ -47,3 +47,25 @@ When the server responds with a SYN ACK, it is stating that the maximum payload 
 
 The maximum payload of the client is: 2055680 bytes   
 The maximum payload of the server is: 33553920 bytes   
+
+This window scale can be used throughout the lifetime of the connection to determine the true window size, take for example the following:
+
+```
+|---------------------------------------|
+|  No.| Address | Packet  | Window size |
+----------------------------------------|
+|  135 | Server | Data    |         131 |
+|---------------------------------------|
+|  199 | Server | Data    |       65535 |
+----------------------------------------|
+```
+
+Packet `135` is telling us that the maximum payload size it will accept is 131 bytes, but as we already know the window scale we can adjust that value:   
+
+> 2^9 = 512   
+> 131 * 512 = 67,072
+
+Packet `199` is telling us that the maximum payload size it will accept is 65535 bytes, but as we already know the window scale we can adjust that value:   
+
+> 2^9 = 512   
+> 63355 * 512 = 33,553,920
