@@ -16,16 +16,16 @@ ifconfig wlan0 up
 First, make sure the interface is in [monitor mode](#monitor-mode)
 
 
-`mdk3 <interface> b -c <channel> -f <file>`
+`mdk3 <interface> b -c <channel> -f <file>`   
 `mdk3 <interface> b -n <ssid> -g -t -m`
 
 Where:   
-`<interface>`   - The interface that is being used to serve the fake AP
-`<channel>`     - The channel to transmit on
-`<file>`        - A file containing SSIDs
-`<ssid>`        - An SSID to assign to the AP
-`-g`            - Show AP as 54 Mbit.
-`-t`            - Show AP using WPA TKIP encryption
+`<interface>`   - The interface that is being used to serve the fake AP   
+`<channel>`     - The channel to transmit on   
+`<file>`        - A file containing SSIDs   
+`<ssid>`        - An SSID to assign to the AP   
+`-g`            - Show AP as 54 Mbit.   
+`-t`            - Show AP using WPA TKIP encryption   
 `-m`            - Assign a valid MAC addresses from the OUI database
 
 example:
