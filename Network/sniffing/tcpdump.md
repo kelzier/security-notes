@@ -25,11 +25,11 @@
 **Three way handshake**
 
 
-> 09:18:08.357631 IP 192.168.0.2 > kali.http: Flags [S], seq 1, win 64240, length 0
+> 09:18:08.357631 IP 192.168.0.2 > kali.http: Flags [S], seq 0, win 64240, length 0
 > 
-> 09:18:08.365416 IP kali.http > 192.168.0.2: Flags [S.], seq 2, ack 3, win 65535, length 0
+> 09:18:08.365416 IP kali.http > 192.168.0.2: Flags [S.], seq 0, ack 1, win 65535, length 0
 > 
-> 09:18:08.365429 IP 192.168.0.2 > kali.http: Flags [.], ack 1, win 502, length 0
+> 09:18:08.365429 IP 192.168.0.2 > kali.http: Flags [.], seq 1, ack 1, win 502, length 0
 
 
 The three way handshake can be seen in the example output above by looking at the flags:
