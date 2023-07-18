@@ -32,14 +32,13 @@ The window size determines the maximum payload that can be recived, and the TCP 
 |-------------------------------------------------------------|
 |  1 | Server  | SYN ACK |       65535 | Window scale |     9 |
 --------------------------------------------------------------|
-
 ```
 
 When the client makes a connection to the server, it is stating that the maximum payload size is 64240 bytes, but it has a window scale set to 5. To determine the maximum payload size, take the window size and multiply it by 2^value.   
-> 2^5 = 32
+> 2^5 = 32   
 > 64240 * 32 = 2,055,680 
 
 When the server responds with a SYN ACK, it is stating that the maximum payload size is 65535 bytes, but it has a window scale set to 9
-> 2^9 = 512
+> 2^9 = 512   
 > 63355 & 512 = 33,553,920
 
