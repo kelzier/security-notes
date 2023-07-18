@@ -16,13 +16,13 @@
 The first packet in the 3-way handshake is the client attempting to connect to the server. The client sends an initial SYN packet with a SEQ number of 0.
 
 ## SYN/ACK
-The server responds to the SYN packet with a SYN/ACK, and starts it's own SEQ number at 0. The serveracknowledges receipt by sending back an ACK with the value of the server's SEQ + 1.
+The server responds to the SYN packet with a SYN/ACK, and starts it's own SEQ number at 0. The server acknowledges receipt by sending back an ACK with the value of the server's SEQ + 1.
 
 ## ACK
 The client receives the server's AYN/ACK and acknowledges receipt by sending back an ACK with the value of the server's SEQ + 1.
 
 ## Window size
-The window size determines the maximum payload that can be recived, and the TCP standard has an upper limit of 65535 bytes. However, during the 3-way handshake the initial SYN packets contain TCP options which allows this to be overridden.
+The window size determines the maximum payload that can be received, and the TCP standard has an upper limit of 65535 bytes. However, during the 3-way handshake the initial SYN packets contain TCP options which allows this to be overridden.
 
 ```
 |-------------------------------------------------------------|

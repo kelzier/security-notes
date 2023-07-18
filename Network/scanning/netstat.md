@@ -33,10 +33,10 @@
 
 ## Example
 
-**Show all connections, with numeric addressess/port and PID**
+**Show all connections, with numeric addresses/port and PID**
 
 `netstat -anp`
 
-**Show only listening connections, with numeric addressess/port and PID**
+**Show only listening connections, with numeric addresses/port and PID**
 
 `netstat -anp`

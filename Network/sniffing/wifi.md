@@ -42,7 +42,7 @@ Finally, bring the interface back up:
 ## Attacking WPA2-PSK
 WPA2-PSK is the most widely used protocol used for securing Wi-Fi, although WPA3 is starting to gain popularity.
 
-To crack WPA2-PSK, the hash of the password must be captured and then cracked offline using a tool like `hashcat`. This passord hash can be captured by sniffing the network traffic until the client sends it to the AP, this can either be done stealthily by waiting or by forcing the client to disconnect from the AP.
+To crack WPA2-PSK, the hash of the password must be captured and then cracked offline using a tool like `hashcat`. This password hash can be captured by sniffing the network traffic until the client sends it to the AP, this can either be done stealthily by waiting or by forcing the client to disconnect from the AP.
 
 The first step is to put the wireless adapter into [monitor mode](#monitor-mode) and then running:
 
@@ -73,7 +73,7 @@ Now that you have the handshake, you can use a cracking program like `hashcat` t
 
 `hashcat -m 16800 file.cap /user/share/dictionary/passwords.txt`
 
-## Using stealth to capure the 4-way handshake
+## Using stealth to capture the 4-way handshake
 Forcing clients to disconnect from the AP is intrusive, fortunately there is a better method which can be used.
 
 First, we need to disable the Network Manager
@@ -123,7 +123,7 @@ The output from hcxdumptool created a file called `dumpfile.pcapng`. This file n
 
 Where:   
 `hash.hc22000`    - The output file for hashcat
-`dumpfile.pcapng` - The input file, created by hxcdumptool
+`dumpfile.pcapng` - The input file, created by hcxdumptool
 
 The resulting file `hash.hc2200` may contain multiple entries. Remove all entries, except the ones containing the BSSID you are interested in cracking.
 
@@ -157,7 +157,7 @@ This will show a list like this:
 |FF:FF:FF:FF:FF:FF  | 1 | -50 | 1.0 | No  | Unknown  | Car                         |
 
 
-Using the information from `wash` and `airodump-ng`, the PIN can be crute forced using either `bully` or `reaver`
+Using the information from `wash` and `airodump-ng`, the PIN can be brute forced using either `bully` or `reaver`
 
 ### Bully
 

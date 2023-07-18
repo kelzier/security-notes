@@ -5,13 +5,13 @@
 | | |
 |-|-|
 |**AP**|This is the access point or router where clients connect.|
-|**PSK**|Pre-Shared Key. This is the passowrd used to authenticate with the AP.|
+|**PSK**|Pre-Shared Key. This is the password used to authenticate with the AP.|
 |**SSID**|Service Set Identifier. The name used to identify the AP.|
 |**ESSID**|Extended Service Set Identifier. This is the same as the SSID by can be used for multiple APs in a wireless LAN.|
 |**BSSID**|Basic Service Set Identifier. This is the unique identifier for the AP. This is the same as the AP MAC Address.|
 |**Channel**|Wi-Fi operates on channels 1-14, but limited to 1-11 in the US.|
 |**Power**|The closer you get to the AP, the stronger the signal.|
-|**Security**|The security protocol to authenticate and encypt Wi-Fi traffic (WEP, WPA-PSK)|
+|**Security**|The security protocol to authenticate and encrypt Wi-Fi traffic (WEP, WPA-PSK)|
 |**Modes**|Wi-Fi can operate in three modes: Master, Managed, Monitor.|
 |**Range**|At the legal limit of 0.5 watts, most Wi-Fi APs are accessible up to 100m, but high gain antennas can reach 20 miles.|
 |**Frequency**|Wi-Fi is designed to operate at 2.4GHZ and 5GHZ|
@@ -99,7 +99,7 @@
 8. **ATIM** is the traffic indication map for IBSS  
 *wlan.fc.type == 0x09*
 
-9. **Dissassociation** is sent to terminate the association of a station  
+9. **Disassociation** is sent to terminate the association of a station  
 *wlan.fc.type == 0x0A*
 
 10. **Authentication** is the frame used to perform 802.11 authentication  
@@ -108,7 +108,7 @@
 11. **Deauthentication** is the frame terminating the authentication of a station. This frame is often used in attack tools to bump users off the AP.  
 *wlan.fc.type == 0x0C*
 
-12. An **Action** frame is used for sending information to other sations  
+12. An **Action** frame is used for sending information to other stations  
 *wlan.fc.type == 0x0D*
 
 13. **PS-Poll** is the power save frame polling for buffered frames after a wake-up from a station  
