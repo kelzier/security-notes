@@ -45,3 +45,5 @@ When the server responds with a SYN ACK, it is stating that the maximum payload 
 > 2^9 = 512   
 > 63355 * 512 = 33,553,920
 
+The maximum payload of the client is: 2055680 bytes   
+The maximum payload of the server is: 33553920 bytes   
