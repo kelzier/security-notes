@@ -35,11 +35,11 @@
 The three way handshake can be seen in the example output above by looking at the flags:
 
 ```
-[S] - This is the SYN flag
+[S] -  This is the SYN flag
 
-[S.] - This is the SYN/ACK flags (the . represents ACK)
+[S.] - This is the SYN/ACK flag
 
-[.] - This is the ACK flag
+[.] -  This is the ACK flag
 ```
 
 ## Filter traffic FROM a host
