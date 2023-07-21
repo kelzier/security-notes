@@ -108,7 +108,7 @@ Frame Check Sequence is an error detecting code, and in most cases this is a Cyc
 |-------------------------------------------------------------------------------------|
 ```
 
-|            |          |
+| Field      | Details  |
 |------------|----------|
 |**version**:| A 4-bit field describing the IP type used in the packet.| 
 |**IHL**:| Internet Header length, a 4 bit field describing the length of the header. |
@@ -143,7 +143,7 @@ Frame Check Sequence is an error detecting code, and in most cases this is a Cyc
 |-------------------------------------------------------------------------------------|
 ```
 
-|            |          |
+| Field      | Details  |
 |------------|----------|
 |**version**:| A 4-bit field describing the IP type used in the packet.| 
 |**Traffic Class**:| An 8-bit field similar to the ToS field in the IPv4 header. The first 6-bits represent the service required for this packet, and the last 2-bits are used for Explicit Congestion Notification.|
