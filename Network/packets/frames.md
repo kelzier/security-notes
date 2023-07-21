@@ -159,9 +159,9 @@ Frame Check Sequence is an error detecting code, and in most cases this is a Cyc
 
 **Flags**   
 
-    URG: urgent pointer. When this bit is set, the data should be treated as priority over other data.
-    ACK: used for the acknowledgment.
-    PSH: this is the push function. This tells an application that the data should be transmitted immediately and that we don’t want to wait to fill the entire TCP segment.
-    RST: this resets the connection, when you receive this you have to terminate the connection right away. This is only used when there are unrecoverable errors and it’s not a normal way to finish the TCP connection.
-    SYN: we use this for the initial three way handshake and it’s used to set the initial sequence number.
-    FIN: this finish bit is used to end the TCP connection. TCP is full duplex so both parties will have to use the FIN bit to end the connection. This is the normal method how we end an connection
+- **URG**: Urgent pointer. When this bit is set, the data should be treated as priority over other data.
+- **ACK**: Used for the acknowledgment.
+- **PSH**: This is the push function. This tells an application that the data should be transmitted immediately and that we don’t want to wait to fill the entire TCP segment.
+- **RST**: This resets the connection, when you receive this you have to terminate the connection right away. This is only used when there are unrecoverable errors and it’s not a normal way to finish the TCP connection.
+- **SYN**: We use this for the initial three way handshake and it’s used to set the initial sequence number.
+- **FIN**: This finish bit is used to end the TCP connection. TCP is full duplex so both parties will have to use the FIN bit to end the connection. This is the normal method how we end an connection
