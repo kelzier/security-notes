@@ -1,4 +1,27 @@
-# Ethernet frame
+# Frames
+
+## Media Access Control Address (MAC Address)
+
+|OUI     || NIC    |
+|---     | --- | ---    |
+|00:22:44|:    |66:88:AA|
+
+**OUI**   
+This is the Organizationally Unique Identifier address. Examples of manufacturer 6-digit numbers include the following:   
+   
+    00000C (Cisco)   
+    00001D (Cabletron)   
+    0004AC (IBM [PCMCIA Ethernet adapter])   
+    0020AF (3Com)   
+    00C0A8 (GVC)   
+    080007 (Apple)   
+    080009 (Hewlett-Packard)   
+
+**OUI**   
+This is the Network Interface Controller Specific address. These bytes are unique to that particular card.
+
+
+## Ethernet frame
 
 ```
 |----------------------------------------------------------------|
@@ -9,6 +32,29 @@
 |                            1518 bytes                          |
 |----------------------------------------------------------------|
 ```
+
+## foo
+
+**Dest Mac**   
+The destination MAC address   
+
+**Source Mac**  
+The source MAC address   
+
+**Ether type**   
+This defines the type of data that is encapsulated in the frame, examples are:   
+
+    0x0800 	Internet Protocol version 4 (IPv4)
+    0x0806 	Address Resolution Protocol (ARP)
+    0x0842 	Wake-on-LAN[8]
+    0x8035 	Reverse Address Resolution Protocol (RARP)
+    0x86DD 	Internet Protocol Version 6 (IPv6) 
+    0x888E 	EAP over LAN (IEEE 802.1X)
+
+**FCS**   
+Frame Check Sequence is an error detecting code, and in most cases this is a Cyclic Redundancy Check (CRC) code.
+
+
 
 ## Data frame (IPv4)
 ```
