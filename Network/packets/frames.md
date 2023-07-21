@@ -33,7 +33,6 @@ This is the Network Interface Controller Specific address. These bytes are uniqu
 |----------------------------------------------------------------|
 ```
 
-## foo
 
 **Dest Mac**   
 The destination MAC address   
