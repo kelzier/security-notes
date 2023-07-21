@@ -54,39 +54,7 @@ This defines the type of data that is encapsulated in the frame, examples are:
 This is the payload of type `Ether type`
 
 **FCS**   
-Frame Check Sequence is an error detecting code, and in most cases this is a Cyclic Redundancy Check (CRC) code.
-
-
-
-## Data frame (IPv4)
-```
-|-------------------------------------|
-| IP       | TCP Options | Payload    |
-|-------------------------------------|
-| 20 bytes | 20 bytes    | 1460 bytes |
-|-------------------------------------|
-|                MTU                  |
-|-------------------------------------|
-|                        |   MSS      |
-|-------------------------------------|
-|               1500 bytes            |
-|-------------------------------------|
-```
-
-## Data frame (IPv6)
-```
-|-------------------------------------|
-| IP       | TCP Options | Payload    |
-|-------------------------------------|
-| 40 bytes | 20 bytes    | 1440 bytes |
-|-------------------------------------|
-|                MTU                  |
-|-------------------------------------|
-|                        |   MSS      |
-|-------------------------------------|
-|               1500 bytes            |
-|-------------------------------------|
-```
+Frame Check Sequence is an error detecting code, and in most cases this is a Cyclic Redundancy Check (CRC) code. This code is used for validation at every hop, and if the data is corrupted or modified then a checksum error is sent.
 
 
 ## IPv4 Header (20 bytes)
@@ -143,13 +111,57 @@ Frame Check Sequence is an error detecting code, and in most cases this is a Cyc
 |-------------------------------------------------------------------------------------|
 ```
 
-| Field      | Details  |
-|------------|----------|
-|**version**:| A 4-bit field describing the IP type used in the packet.| 
-|**Traffic Class**:| An 8-bit field similar to the ToS field in the IPv4 header. The first 6-bits represent the service required for this packet, and the last 2-bits are used for Explicit Congestion Notification.|
-|**Flow label**:| A 20-bit field used to label packets belonging to the same sequence to ensure packets are delivered in the correct order. |
-|**Payload length**:| A 16-bit field that indicates the total size of the packet, with a maximum size of 65535 |
-|**Next header**:| An 8-bit field that indicates the type of the first extension header |
-|**Hop limit**:| This is the same as the TTL field in the IPv4 header. It indicates the number of hops a packet can take before being discarded.|
-|**Source address**:| A 128-bit IP address of the source device.|
-|**Destination address**:| 128-bit IP address of the destination device. |
+| Field                  | Details  |
+|------------------------|----------|
+|**version**:            | A 4-bit field describing the IP type used in the packet.| 
+|**Traffic Class**:      | An 8-bit field similar to the ToS field in the IPv4 header. The first 6-bits represent the service required for this packet, and the last 2-bits are used for Explicit Congestion Notification.|
+|**Flow label**:         | A 20-bit field used to label packets belonging to the same sequence to ensure packets are delivered in the correct order. |
+|**Payload length**:     | A 16-bit field that indicates the total size of the packet, with a maximum size of 65535 |
+|**Next header**:        | An 8-bit field that indicates the type of the first extension header |
+|**Hop limit**:          | This is the same as the TTL field in the IPv4 header. It indicates the number of hops a packet can take before being discarded.|
+|**Source address**:     | A 128-bit IP address of the source device.|
+|**Destination address**:| A 128-bit IP address of the destination device. |
+
+## TCP Header
+```
+|-------------------------------------------------------------------------------------|
+|                                         Bits                                        |
+|-------------------------------------------------------------------------------------|
+|0       4|        8|        12|        16|        20|        24|        28|        31|
+|-------------------------------------------------------------------------------------|
+|                Source port              |              Destination port             |
+|-------------------------------------------------------------------------------------|
+|                                   Sequence number                                   |
+|-------------------------------------------------------------------------------------|
+|                               Acknowledgement number                                |
+|-------------------------------------------------------------------------------------|
+| Length  |            Flags              | Window                                    |
+|-------------------------------------------------------------------------------------|
+|                 Checksum                |             Urgent pointer                |
+|-------------------------------------------------------------------------------------|
+|                                     TCP Options                                     |
+|-------------------------------------------------------------------------------------|
+
+```
+
+| Field                     | Details  |
+|---------------------------|----------|
+|**Source port**:           | A 16-bit port number defining the port number of the sender.  |
+|**Destination port**:      | A 16-bit port number defining the port number of the recipient. |
+|**Sequence number**:       | When you establish a new TCP connection the initial sequence number is a random 32 bit value. The receiver will use this sequence number and sends back an acknowledgment.|
+|**Acknowledgement number**:| A 32-bit field is used by the receiver to request the next TCP segment. This value will be the sequence number incremented by 1.|
+|**Length**:                | A 4-bit field that indicates the length of the TCP header so the location of the data can be determined. |
+|**Flags**:                 | A 12-bit field that represents control bits, this is used to establish connections, send data and terminate connections:         |
+|**Window**:                | A 16-bit window field specifies how many bytes the receiver is willing to receive.    |
+|**Checksum**:              | A 16-bit checksum used to determine if the header is correct.  |
+|**Urgent pointer**:        | A 16-bits pointer used to indicate where the urgent data ends. This is set when the URG flag has been set.  |
+|**TCP Options**:           | This field is optional and can be anywhere between 0 and 320 bits. |
+
+**Flags**   
+
+    URG: urgent pointer. When this bit is set, the data should be treated as priority over other data.
+    ACK: used for the acknowledgment.
+    PSH: this is the push function. This tells an application that the data should be transmitted immediately and that we don’t want to wait to fill the entire TCP segment.
+    RST: this resets the connection, when you receive this you have to terminate the connection right away. This is only used when there are unrecoverable errors and it’s not a normal way to finish the TCP connection.
+    SYN: we use this for the initial three way handshake and it’s used to set the initial sequence number.
+    FIN: this finish bit is used to end the TCP connection. TCP is full duplex so both parties will have to use the FIN bit to end the connection. This is the normal method how we end an connection
