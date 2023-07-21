@@ -50,6 +50,9 @@ This defines the type of data that is encapsulated in the frame, examples are:
     0x86DD 	Internet Protocol Version 6 (IPv6) 
     0x888E 	EAP over LAN (IEEE 802.1X)
 
+**Data**
+This is the payload of type `Ether type`
+
 **FCS**   
 Frame Check Sequence is an error detecting code, and in most cases this is a Cyclic Redundancy Check (CRC) code.
 
